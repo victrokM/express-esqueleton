@@ -4,28 +4,35 @@ import Products from "../models/products";
 export const getProducts = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void> => {
   try {
     const Product = await Products.findAll();
-    return res.json(Product);
+    // only gets use this form
+    res.json(Product);
+    return;
   } catch (error) {
-    return res.status(500).json({ message: error });
+    res.status(500).json({ message: error });
+    return;
   }
 };
 
 export const getProduct = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void> => {
   try {
     const { id } = req.params;
     const Product = await Products.findByPk(id);
     if (Product === null || Product === undefined) {
-      return res.status(404).json({ message: "Product not found" });
+      // only gets use this method
+      res.status(404).json({ message: "Product not found" });
+      return;
     }
-    return res.json(Product);
+    res.json(Product);
+    return;
   } catch (error) {
-    return res.status(500).json({ message: error });
+    res.status(500).json({ message: error });
+    return;
   }
 };
 
