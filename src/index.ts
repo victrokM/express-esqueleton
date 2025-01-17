@@ -7,11 +7,16 @@ require("dotenv").config();
 
 async function main() {
   try {
+    const PORT = process.env.PORT || 3001; // Asegúrate de usar el puerto desde variables de entorno o un valor por defecto
     // await sequelize.sync({ alter: true });
-    app.listen(3000);
-    console.log("Server running on port 3000");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`); // Muestra el puerto correcto
+    });
+    app.get("/", (req, res) => {
+      res.send("Server is running!");
+    });
   } catch (error) {
-    console.log(error, "xd");
+    console.error("Error while starting the server:", error);
   }
 }
 

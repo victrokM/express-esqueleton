@@ -1,0 +1,11 @@
+services:
+  my-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/core-Ecommerce
+      - /core-Ecommerce/node_modules
+    ports:
+      - "3000:3000"
+    command: ["pnpm", "start"]
