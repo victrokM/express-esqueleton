@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20-alpine3.16
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /core-ecommerce
@@ -13,7 +13,8 @@ RUN npm install
 COPY . .
 
 # Construye la aplicación
-RUN npm run build
+RUN npm run build && \
+    npm prune --production
 
 # Expone el puerto 3000
 EXPOSE 3000
